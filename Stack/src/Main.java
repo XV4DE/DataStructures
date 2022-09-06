@@ -69,18 +69,19 @@ class Main {
     static void testPop() {
         Stack ms = new Stack(5);
         ms.push(3);
-        if (ms.pop() != 3) {
-            System.out.println("testPop failed");
+        if (ms.pop() == 3) {
+            pass++;
+        } else {
             fail++;
-            return;
+            LOGGER.log(Level.WARNING, "Failed stack pop, expected 3 got not 3");
         }
         ms.push(4);
-        if (ms.pop() != 4) {
-            System.out.println("testPop failed");
+        if (ms.pop() == 4) {
+            pass++;
+        } else {
             fail++;
-            return;
+            LOGGER.log(Level.WARNING, "Failed stack pop, expected 4 got not 4");
         }
-        fail++;
     }
 
     static void testPopWhenEmpty() {
