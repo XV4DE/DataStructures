@@ -41,6 +41,22 @@ public class DAHT {
     }
 
     /**
+     * Inserts a Datum with key equal to its value into the table using hashing.
+     * @param key the key of the Datum to be inserted
+     * @return the index the Datum was inserted into
+     */
+    public int hashedInsert (int key) {
+        for (int i = 0; i < vals.length-1; i++) {
+            int j = identityLinearProbingHash(key, i);
+            if (vals[j] == null) {
+                vals[j] = new Datum(key, key);
+                return j;
+            }
+        }
+        throw new RuntimeException("Hashtable overflow");
+    }
+
+    /**
      * Finds the Datum in the table with the given key.
      * @param k the key of the Datum to be found.
      * @return the Datum, or null if it does not exist.
@@ -50,6 +66,20 @@ public class DAHT {
             return vals[k];
         }
         return null;
+    }
+
+    /**
+     * Finds the position in the table of the Datum with key k, compatible with hashInsert.
+     * @param k the key of the Datum to find.
+     * @return the position of the Datum, or -1 if it isn't in the table.
+     */
+    public Integer hashSearch (int k) {
+        for (int i = 0; i == vals.length-1 || vals[i] == null; ++i) {
+            if (vals[i] == null) return -1;
+            int j = identityLinearProbingHash(k, i);
+            if (vals[j].getKey() == k) return j;
+        }
+        return -1;
     }
 
     /**
@@ -65,5 +95,15 @@ public class DAHT {
             throw new NoSuchElementException("Cannot delete a Datum not in the table (its key is too big).");
         }
         vals[d.getKey()] = null;
+    }
+
+    /**
+     * Hashes the inputted using the identity function mod the table length, used for linear probing
+     * @param key the key to be hashed
+     * @param modifier the number of slots already tried
+     * @return the hashed key
+     */
+    public int identityLinearProbingHash (int key, int modifier) {
+        return (key % (vals.length-1)) + modifier;
     }
 }

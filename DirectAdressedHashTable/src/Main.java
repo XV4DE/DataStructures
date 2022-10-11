@@ -10,6 +10,9 @@ public class Main {
         passOnTrue(testConstructorDatum());
         passOnTrue(testInsertDAHT());
         passOnTrue(testDeleteDAHT());
+        passOnTrue(testIdentityLinearProbingHash());
+        passOnTrue(testHashedInsert());
+        passOnTrue(testHashSearch());
 
 
         System.out.println("pass " + pass + " fail " + fail);
@@ -136,6 +139,53 @@ public class Main {
          fD.delete(fD.search(1));
          if (fD.search(1) != null) return false;
 
+         return true;
+     }
+
+    /**
+     * Tests the identityLinearProbingHash method of the DAHT class.
+     * @return true if the test passes, false if it fails.
+     */
+     public static boolean testIdentityLinearProbingHash () {
+         DAHT fD = new DAHT(5);
+         if (fD.identityLinearProbingHash(1, 2) != 3) return false;
+         if (fD.identityLinearProbingHash(-4, 2) != -2) return false;
+
+         return true;
+     }
+
+    /**
+     * tests the hashedInsert method of the DAHT class
+     * @return true if the test passes, false if it fails.
+     */
+     public static boolean testHashedInsert () {
+         DAHT fD = new DAHT(5);
+         fD.hashedInsert(0);
+         fD.hashedInsert(1);
+         fD.hashedInsert(2);
+         if (fD.hashedInsert(1) != 3) return false;
+         if (fD.hashedInsert(4) != 4) return false;
+         try {
+             fD.hashedInsert(1);
+         } catch (RuntimeException e) {
+             if (!e.getMessage().equals("Hashtable overflow")) return false;
+         }
+
+         return true;
+     }
+
+    /**
+     * Tests the method hashSearch of the DAHT class
+     * @return true if the test passed, false if it failed.
+     */
+    public static boolean testHashSearch () {
+         DAHT fD = new DAHT(5);
+         if (fD.hashSearch(2) != -1) return false;
+//        System.out.println(fD.hashedInsert(3));
+//         fD.hashedInsert(3);
+//         if (fD.hashSearch(3) != 3) return false;
+//         fD.hashedInsert(8);
+//         if (fD.hashSearch(8) != 4) return false;
          return true;
      }
 }
