@@ -12,6 +12,22 @@ public class Edge {
     }
 
     /**
+     * The getter for the start field.
+     * @return the start field.
+     */
+    public Node getStart() {
+        return start;
+    }
+
+    /**
+     * The getter for the end field.
+     * @return the end field.
+     */
+    public Node getEnd() {
+        return end;
+    }
+
+    /**
      * Converts the Edge to a String.
      * @return a String including the start and end Nodes.
      */

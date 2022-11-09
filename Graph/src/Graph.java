@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Graph {
-    public HashSet<Node> nodes;
-    public HashSet<Edge> edges;
+    public ArrayList<Node> nodes;
+    public Edge[][] edges;
 
     /**
      * A constructor for Graph, initializes the Graph as input specifies.
@@ -10,15 +11,23 @@ public class Graph {
      * @param e the set of Edges to be in the Graph
      */
     public Graph(HashSet<Node> n, HashSet<Edge> e) {
-        for (Node i : n) nodes.add(i);
-        for (Edge i : e) edges.add(i);
+        nodes = new ArrayList<>();
+        edges = new Edge[n.size()][n.size()];
+        nodes.addAll(n);
+        for (Edge edge : e) {
+            try {
+                edges[nodes.indexOf(edge.getStart())][nodes.indexOf(edge.getEnd())] = edge;
+            } catch (IndexOutOfBoundsException exc) {
+                throw new IllegalArgumentException("All edges must start and end at nodes in the graph.");
+            }
+        }
     }
 
     /**
      * Getter for the field nodes.
      * @return nodes.
      */
-    public HashSet<Node> getNodes() {
+    public ArrayList<Node> getNodes() {
         return nodes;
     }
 
@@ -26,7 +35,7 @@ public class Graph {
      * Getter for the field edges.
      * @return edges.
      */
-    public HashSet<Edge> getEdges() {
+    public Edge[][] getEdges() {
         return edges;
     }
 }
