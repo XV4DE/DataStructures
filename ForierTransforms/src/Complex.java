@@ -14,6 +14,10 @@ public class Complex {
         return new Complex(real + other.getReal(), imaginary + other.getImaginary());
     }
 
+    public Complex negate () {
+        return new Complex(-real, -imaginary);
+    }
+
     public Complex toThe (int k) {
         double arg = Math.atan(imaginary/real);
         return new Complex(Math.pow(arg, k), k * arg);
