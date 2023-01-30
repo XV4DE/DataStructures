@@ -1,5 +1,4 @@
 import java.util.NoSuchElementException;
-
 public class Main {
     static int pass;
     static int fail;

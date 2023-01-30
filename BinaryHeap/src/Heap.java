@@ -32,7 +32,7 @@ public class Heap {
 
     /**
      *
-     * @param n the
+     * @param n the number to insert
      */
     public void insert (int n) {
         contents[count] = n;
