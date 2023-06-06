@@ -14,6 +14,17 @@ public class Main {
         passOnTrue(testVectorEquals());
         passOnTrue(testDotProduct());
         passOnTrue(testVectorAdd());
+
+        Vector[] v = new Vector[] {
+                new Vector(new double[] {0, 0, 0, 0, 0}),
+                new Vector(new double[] {0, 0, 0, 0, 0}),
+                new Vector(new double[] {0, 0, 0, 0, 0}),
+                new Vector(new double[] {0, 0, 0, 0, 0}),
+                new Vector(new double[] {0, 0, 0, 0, 0})
+        };
+        Matrix m = new Matrix(v);
+        SystemOfEquations s = new SystemOfEquations(m);
+
         System.out.println("Passed " + passes + "/" + tries + " tests.");
     }
 

@@ -8,6 +8,8 @@ public class Main {
         passOnTrue(testSolve());
         passOnTrue(testSolveRandom());
         System.out.println("Passed " + passes + "/" + tests);
+
+
     }
 
     public static boolean testBackSub () {

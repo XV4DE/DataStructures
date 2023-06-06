@@ -79,4 +79,8 @@ public class Matrix {
     public boolean equals (Matrix other) {
         return equals(other, 0.01);
     }
+
+    public static double minimizeDif (double[] a, double[] b) {
+
+    }
 }
